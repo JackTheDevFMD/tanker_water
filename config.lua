@@ -4,7 +4,9 @@ config.spawnCodes = {
     "ftanker"
 }
 
-config.bone = "misc_z"
+config.resourceName = "tanker_water"
+config.bone = "misc_y"
+
 
 -- Detail texture
 

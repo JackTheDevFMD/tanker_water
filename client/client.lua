@@ -1,32 +1,35 @@
+local display = false
+local fillingUp = false
 
 
--- UI
+Citizen.CreateThread(function()
+    while true do
+        Citizen.Wait(1)
+        if display then 
+            -- If ped gets out of vehicle
+            if not IsPedSittingInAnyVehicle(PlayerPedId()) then
+                SetDisplay(false)
+            end
+        elseif IsPedSittingInAnyVehicle(PlayerPedId()) and not display and fillingUp then
 
-local ui = false
+            local currentVeh = GetDisplayNameFromVehicleModel(GetEntityModel(GetVehiclePedIsIn(PlayerPedId(), false)))
+            local inVehicle = false
 
-RegisterCommand('showuitest', function(source, args)
-    SetDisplay(not display)
+            for k,v in pairs(config.spawnCodes) do 
+                if currentVeh == v then 
+                    inVehicle = true
+                end
+            end
+
+            if inVehicle then 
+                SetDisplay(true)
+            end
+
+        end
+    end        
 end)
 
-RegisterCommand('removeui', function(source, args)
-    SetDisplay(not display)
-end)
-
-
-
-RegisterNUICallback("exit", function(data)
-    SetDisplay(false)
-end)
-
-function SetDisplay(bool)
-    display = bool
-    SendNUIMessage({
-        type = "ui",
-        status = bool,
-    })
-end
-
-
+-- Commands
 RegisterCommand("fillpool", function()
     local ped = PlayerPedId()
     local pedCoords = GetEntityCoords(ped)
@@ -44,7 +47,11 @@ RegisterCommand("fillpool", function()
 
     if inVehicle then
         if IsVehicleAConvertible(vehEntity, false) == 1 then
-            SetDisplay(not display)
+            fillingUp = true
+            SetDisplay(true)
+            SendNUIMessage({
+                waterType = "filling"
+            })
 
             TriggerServerEvent("setWaterTexture")
 
@@ -83,6 +90,11 @@ RegisterCommand("emptypool", function()
 
     if inVehicle then
         if IsVehicleAConvertible(vehEntity, false) == 1 then 
+            fillingUp = false
+            SetDisplay(true)
+            SendNUIMessage({
+                waterType = "emptying"
+            })
 
             local state = GetConvertibleRoofState(vehEntity)
             if state ~= 0 then 
@@ -90,7 +102,7 @@ RegisterCommand("emptypool", function()
                 RaiseConvertibleRoof(vehEntity, false)
             end
 
-            SetVehicleExtra(vehEntity, 12, true)
+            SetVehicleExtra(vehEntity, 12, false)
 
         end
     else 
@@ -144,4 +156,13 @@ function notify(str)
     BeginTextCommandThefeedPost("STRING")
     AddTextComponentSubstringPlayerName(str)
     EndTextCommandThefeedPostTicker(true, false)
+end
+
+
+function SetDisplay(bool)
+    display = bool
+    SendNUIMessage({
+        type = "ui",
+        status = bool,
+    })
 end

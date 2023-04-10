@@ -9,8 +9,12 @@ body {
 	background-color: rgb(44, 44, 44, 0);
 }
 
-.opacityofimage {
+.turnOffImage {
 	opacity: 0;
+}
+
+.turnOnImage {
+	opacity: 100;
 }
 
 #image {
