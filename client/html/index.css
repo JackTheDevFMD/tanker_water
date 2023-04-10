@@ -1,0 +1,147 @@
+body {
+	background: none !important;
+}
+
+#container {
+	position: absolute;
+	left: 1735px;
+	top: 10px;
+	background-color: rgb(44, 44, 44, 0);
+}
+
+.opacityofimage {
+	opacity: 0;
+}
+
+#image {
+	height: 300px;
+	width: 175px;
+}
+
+#light1 {
+	position: absolute;
+	left: 52px;
+	top: 62px;
+	height: 20px;
+	width: 70px;
+}
+
+#light2 {
+	position: absolute;
+	left: 52px;
+	top: 86px;
+	height: 20px;
+	width: 70px;
+}
+
+#light3 {
+	position: absolute;
+	left: 52px;
+	top: 108px;
+	height: 20px;
+	width: 70px;
+}
+
+#light4 {
+	position: absolute;
+	left: 52px;
+	top: 130px;
+	height: 20px;
+	width: 70px;
+}
+
+#light5 {
+	position: absolute;
+	left: 52px;
+	top: 152px;
+	height: 20px;
+	width: 70px;
+}
+
+#light6 {
+	position: absolute;
+	left: 52px;
+	top: 174px;
+	height: 20px;
+	width: 70px;
+}
+
+#light7 {
+	position: absolute;
+	left: 52px;
+	top: 194px;
+	height: 20px;
+	width: 70px;
+}
+
+#light8 {
+	position: absolute;
+	left: 52px;
+	top: 216px;
+	height: 20px;
+	width: 70px;
+}
+
+#light1 {
+	position: absolute;
+	left: 52px;
+	top: 62px;
+	height: 20px;
+	width: 70px;
+}
+
+#light2 {
+	position: absolute;
+	left: 52px;
+	top: 86px;
+	height: 20px;
+	width: 70px;
+}
+
+#light3 {
+	position: absolute;
+	left: 52px;
+	top: 108px;
+	height: 20px;
+	width: 70px;
+}
+
+#light4 {
+	position: absolute;
+	left: 52px;
+	top: 130px;
+	height: 20px;
+	width: 70px;
+}
+
+#light5 {
+	position: absolute;
+	left: 52px;
+	top: 152px;
+	height: 20px;
+	width: 70px;
+}
+
+#light6 {
+	position: absolute;
+	left: 52px;
+	top: 174px;
+	height: 20px;
+	width: 70px;
+}
+
+#light7 {
+	position: absolute;
+	left: 52px;
+	top: 194px;
+	height: 20px;
+	width: 70px;
+}
+
+#light8 {
+	position: absolute;
+	left: 52px;
+	top: 216px;
+	height: 20px;
+	width: 70px;
+}
