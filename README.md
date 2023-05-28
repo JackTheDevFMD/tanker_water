@@ -10,6 +10,6 @@ If anyone wants to contribute to the project please feel free to shoot me a DM o
 
 # Contact us
 
-Website -> [https://www.freemodedesigns.shop](https://www.freemodedesigns.shop)
-Discord -> [https://discord.gg/fmd](https://discord.gg/fmd)
-Email - > [jackthedev@freemodedesigns.shop](jackthedev@freemodedesigns.shop)
+- Website -> [https://www.freemodedesigns.shop](https://www.freemodedesigns.shop)
+- Discord -> [https://discord.gg/fmd](https://discord.gg/fmd)
+- Email - > [jackthedev@freemodedesigns.shop](jackthedev@freemodedesigns.shop)
