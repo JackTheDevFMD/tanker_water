@@ -15,12 +15,10 @@ Citizen.CreateThread(function()
             local currentVeh = GetDisplayNameFromVehicleModel(GetEntityModel(GetVehiclePedIsIn(PlayerPedId(), false)))
             local inVehicle = false
 
-            for k,v in pairs(config.spawnCodes) do 
-                if currentVeh == v then 
-                    inVehicle = true
-                end
+            if currentVeh == config.spawnCodes then 
+                inVehicle = true
             end
-
+            
             if inVehicle then 
                 SetDisplay(true)
             end
@@ -37,11 +35,8 @@ RegisterCommand("fillpool", function()
     local vehEntity = GetVehiclePedIsIn(GetPlayerPed(-1), false)
     local inVehicle = False
 
-
-    for k,v in pairs(config.spawnCodes) do 
-        if currentVeh == v then 
-            inVehicle = true
-        end
+    if currentVeh == config.spawnCode then 
+        inVehicle = true
     end
     
 
@@ -56,12 +51,14 @@ RegisterCommand("fillpool", function()
             TriggerServerEvent("setWaterTexture")
 
             local state = GetConvertibleRoofState(vehEntity)
-            if state == 0 then 
-                SetConvertibleRoof(vehEntity)
-                LowerConvertibleRoof(vehEntity, false)
-            end
 
-            SetVehicleExtra(vehEntity, 12, false)
+            --if state == 2 then 
+            SetConvertibleRoof(vehEntity)
+            LowerConvertibleRoof(vehEntity, false)
+            --end
+
+            SetVehicleModKit(vehEntity, 0)
+            SetVehicleMod(vehEntity, 37, GetNumVehicleMods(vehEntity, 37)-1, false)
 
             TriggerServerEvent("createWaterParticles", vehEntity)
 
@@ -81,10 +78,8 @@ RegisterCommand("emptypool", function()
     local inVehicle = False
 
 
-    for k,v in pairs(config.spawnCodes) do 
-        if currentVeh == v then 
-            inVehicle = true
-        end
+    if currentVeh == config.spawnCode then 
+        inVehicle = true
     end
     
 
@@ -97,12 +92,15 @@ RegisterCommand("emptypool", function()
             })
 
             local state = GetConvertibleRoofState(vehEntity)
+
             if state ~= 0 then 
                 SetConvertibleRoof(vehEntity)
                 RaiseConvertibleRoof(vehEntity, false)
             end
 
-            SetVehicleExtra(vehEntity, 12, false)
+            Citizen.CreateThread(function()
+                
+            end)
 
         end
     else 
@@ -137,18 +135,39 @@ AddEventHandler("updateTexture", function()
     -- Detail
     local txdDetail = CreateRuntimeTxd("duiTxdDetail")
     local duiObjDetail = CreateDui(config.detailTexture, config.detailSizeX, config.detailSizeY)
-    _G.duiObj = duiObjDetail
+    _G.duiObjDetail = duiObjDetail
     local duiDetail = GetDuiHandle(duiObjDetail)
     local txDetail = CreateRuntimeTextureFromDuiHandle(txdDetail, 'duiTexDetail', duiDetail)
-    AddReplaceTexture('ftanker', 'water_sign_1', 'duiTxdDetail', 'duiTexDetail')
+    AddReplaceTexture(config.ytdName, config.detailTextureName, 'duiTxdDetail', 'duiTexDetail')
 
     -- Bump
     local txdBump = CreateRuntimeTxd("duiTxdBump")
     local duiObjBump = CreateDui(config.bumpTexture, config.bumpSizeX, config.bumpSizeY)
+    _G.duiObjBump = duiObjBump
+    local duiBump = GetDuiHandle(duiObjBump)
+    local txBump = CreateRuntimeTextureFromDuiHandle(txdBump, 'duiTexBump', duiBump)
+    AddReplaceTexture(config.ytdName, config.bumpTextureName, 'duiTxdBump', 'duiTexBump')
+
+end)
+
+RegisterNetEvent("resetTexture")
+AddEventHandler("resetTexture", function()
+
+    -- Detail
+    local txdDetail = CreateRuntimeTxd("duiTxdDetail")
+    local duiObjDetail = CreateDui(config.detailResetTexture, config.detailResetSizeX, config.detailResetSizeY)
+    _G.duiObj = duiObjDetail
+    local duiDetail = GetDuiHandle(duiObjDetail)
+    local txDetail = CreateRuntimeTextureFromDuiHandle(txdDetail, 'duiTexDetail', duiDetail)
+    AddReplaceTexture(config.ytdName, config.detailResetTextureName, 'duiTxdDetail', 'duiTexDetail')
+
+    -- Bump
+    local txdBump = CreateRuntimeTxd("duiTxdBump")
+    local duiObjBump = CreateDui(config.bumpResetTexture, config.bumpResetSizeX, config.bumpResetSizeY)
     _G.duiObj = duiObjBump
     local duiBump = GetDuiHandle(duiObjBump)
     local txBump = CreateRuntimeTextureFromDuiHandle(txdBump, 'duiTexBump', duiBump)
-    AddReplaceTexture('ftanker', 'waterbump_sign_1', 'duiTxdBump', 'duiTexBump')
+    AddReplaceTexture(config.ytdName, config.bumpResetTextureName, 'duiTxdBump', 'duiTexBump')
 
 end)
 

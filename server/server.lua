@@ -15,3 +15,8 @@ AddEventHandler("setWaterTexture", function()
 end)
 
 
+RegisterNetEvent("resetWaterTexture")
+AddEventHandler("resetWaterTexture", function()
+    TriggerClientEvent("resetTexture", -1)
+end)
+

@@ -15,7 +15,6 @@ shared_script  {
 }
 
 ui_page 'client/html/index.html'
-
 files {
     'client/html/index.html',
     'client/html/index.js',
