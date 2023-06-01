@@ -24,6 +24,8 @@ $(function () {
 				}
 			}, (51 - i) * 1000);
 		}
+
+		display(false);
 	}
 
 	function increaseLights() {
@@ -45,6 +47,8 @@ $(function () {
 				}
 			}, (51 - i) * 1000);
 		}
+
+		display(false);
 	}
 
 	window.addEventListener('message', function (event) {

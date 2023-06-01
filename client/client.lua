@@ -43,10 +43,13 @@ RegisterCommand("fillpool", function()
     if inVehicle then
         if IsVehicleAConvertible(vehEntity, false) == 1 then
             fillingUp = true
-            SetDisplay(true)
-            SendNUIMessage({
-                waterType = "filling"
-            })
+
+            if config.useUI then 
+                SetDisplay(true)
+                SendNUIMessage({
+                    waterType = "filling"
+                })
+            end
 
             TriggerServerEvent("setWaterTexture")
 
@@ -61,6 +64,12 @@ RegisterCommand("fillpool", function()
             SetVehicleMod(vehEntity, 37, GetNumVehicleMods(vehEntity, 37)-1, false)
 
             TriggerServerEvent("createWaterParticles", vehEntity)
+
+            Citizen.CreateThread(function()
+                Citizen.Wait(50000) -- 50 Seconds
+
+                fillingUp = false
+            end)
 
         end
     else 
@@ -84,24 +93,33 @@ RegisterCommand("emptypool", function()
     
 
     if inVehicle then
-        if IsVehicleAConvertible(vehEntity, false) == 1 then 
-            fillingUp = false
-            SetDisplay(true)
-            SendNUIMessage({
-                waterType = "emptying"
-            })
+        if not fillingUp then 
+            if IsVehicleAConvertible(vehEntity, false) == 1 then 
+                fillingUp = false
 
-            local state = GetConvertibleRoofState(vehEntity)
+                if config.useUI then 
+                    SetDisplay(true)
+                    SendNUIMessage({
+                        waterType = "emptying"
+                    })
+                end
 
-            if state ~= 0 then 
-                SetConvertibleRoof(vehEntity)
-                RaiseConvertibleRoof(vehEntity, false)
+                local state = GetConvertibleRoofState(vehEntity)
+
+                if state ~= 0 then 
+                    SetConvertibleRoof(vehEntity)
+                    RaiseConvertibleRoof(vehEntity, false)
+                end
+
+                Citizen.CreateThread(function()
+                    Citizen.Wait(50000) -- 50 Seconds
+
+                    TriggerServerEvent("resetWaterTexture")
+                end)
+
             end
-
-            Citizen.CreateThread(function()
-                
-            end)
-
+        else 
+            notify("You need to wait to complete filling up before emptying.")
         end
     else 
         notify("You need to be in the tanker truck to do this!")
@@ -150,9 +168,13 @@ AddEventHandler("updateTexture", function()
 
 end)
 
+RegisterCommand("test", function()
+    TriggerEvent("resetTexture")
+end)
+
 RegisterNetEvent("resetTexture")
 AddEventHandler("resetTexture", function()
-
+    
     -- Detail
     local txdDetail = CreateRuntimeTxd("duiTxdDetail")
     local duiObjDetail = CreateDui(config.detailResetTexture, config.detailResetSizeX, config.detailResetSizeY)

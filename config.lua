@@ -2,6 +2,7 @@ config = {}
 
 -- Add more to this if you are using the same truck with different spawn codes. 
 config.spawnCode = "ftanker"
+config.useUI = true
 
 -- !!!! DO NOT CHANGE ANYTHING BELOW THIS !!!! --
 config.resourceName = "tanker_water"
@@ -30,7 +31,7 @@ config.bumpSizeY = 32
 -- Detail texture
 
 config.detailResetTextureName = "water_sign_1"
-config.detailResetTexture = "https://cdn.discordapp.com/attachments/691318403327328336/1099325120209764483/water_sign_1.png"
+config.detailResetTexture = "https://cdn.discordapp.com/attachments/1049744688053243927/1113224847116472400/water_sign_1.png"
 config.detailResetSizeX = 4
 config.detailResetSizeY = 4
 
