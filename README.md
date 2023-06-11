@@ -20,6 +20,3 @@ If anyone wants to contribute to the project please feel free to shoot me a DM o
 - Discord -> [https://discord.gg/fmd](https://discord.gg/fmd)
 - Email - > jackthedev@freemodedesigns.shop
 
-# Current Script bugs:
-
-- When /emptypool is ran, the texture doens't reset back to transparent.
