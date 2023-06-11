@@ -11,12 +11,12 @@ end)
 
 RegisterNetEvent("setWaterTexture")
 AddEventHandler("setWaterTexture", function()
-    TriggerClientEvent("updateTexture", -1)
+    TriggerClientEvent("updateTexture", -1, true)
 end)
 
 
 RegisterNetEvent("resetWaterTexture")
 AddEventHandler("resetWaterTexture", function()
-    TriggerClientEvent("resetTexture", -1)
+    TriggerClientEvent("updateTexture", -1, false)
 end)
 

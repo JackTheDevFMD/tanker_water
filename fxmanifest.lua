@@ -21,5 +21,6 @@ files {
     'client/html/index.css',
     'client/html/reset.css',
     'client/html/imgs/water.png',
-    'client/html/imgs/lights.png'
+    'client/html/imgs/lights.png',
+    'grill.png'
 }

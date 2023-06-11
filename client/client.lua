@@ -1,6 +1,16 @@
 local display = false
 local fillingUp = false
 
+local txdDetail
+local duiObjDetail
+local duiDetail 
+local txDetail
+
+local txdBump
+local duiObjBump
+local duiBump
+local txBump
+
 
 Citizen.CreateThread(function()
     while true do
@@ -148,50 +158,35 @@ AddEventHandler("waterParticles", function(vehEntity)
 end)
 
 RegisterNetEvent("updateTexture")
-AddEventHandler("updateTexture", function()
+AddEventHandler("updateTexture", function(toggle)
 
-    -- Detail
-    local txdDetail = CreateRuntimeTxd("duiTxdDetail")
-    local duiObjDetail = CreateDui(config.detailTexture, config.detailSizeX, config.detailSizeY)
-    _G.duiObjDetail = duiObjDetail
-    local duiDetail = GetDuiHandle(duiObjDetail)
-    local txDetail = CreateRuntimeTextureFromDuiHandle(txdDetail, 'duiTexDetail', duiDetail)
-    AddReplaceTexture(config.ytdName, config.detailTextureName, 'duiTxdDetail', 'duiTexDetail')
+    if toggle then 
 
-    -- Bump
-    local txdBump = CreateRuntimeTxd("duiTxdBump")
-    local duiObjBump = CreateDui(config.bumpTexture, config.bumpSizeX, config.bumpSizeY)
-    _G.duiObjBump = duiObjBump
-    local duiBump = GetDuiHandle(duiObjBump)
-    local txBump = CreateRuntimeTextureFromDuiHandle(txdBump, 'duiTexBump', duiBump)
-    AddReplaceTexture(config.ytdName, config.bumpTextureName, 'duiTxdBump', 'duiTexBump')
+        -- Detail
+        txdDetail = CreateRuntimeTxd("duiTxdDetail")
+        duiObjDetail = CreateDui(config.detailTexture, config.detailSizeX, config.detailSizeY)
+        _G.duiObjDetail = duiObjDetail
+        duiDetail = GetDuiHandle(duiObjDetail)
+        txDetail = CreateRuntimeTextureFromDuiHandle(txdDetail, 'duiTexDetail', duiDetail)
+        AddReplaceTexture(config.ytdName, config.detailTextureName, 'duiTxdDetail', 'duiTexDetail')
 
-end)
+        -- Bump
+        txdBump = CreateRuntimeTxd("duiTxdBump")
+        duiObjBump = CreateDui(config.bumpTexture, config.bumpSizeX, config.bumpSizeY)
+        _G.duiObjBump = duiObjBump
+        duiBump = GetDuiHandle(duiObjBump)
+        txBump = CreateRuntimeTextureFromDuiHandle(txdBump, 'duiTexBump', duiBump)
+        AddReplaceTexture(config.ytdName, config.bumpTextureName, 'duiTxdBump', 'duiTexBump')
 
-RegisterCommand("test", function()
-    TriggerEvent("resetTexture")
-end)
+    else 
 
-RegisterNetEvent("resetTexture")
-AddEventHandler("resetTexture", function()
-    
-    -- Detail
-    local txdDetail = CreateRuntimeTxd("duiTxdDetail")
-    local duiObjDetail = CreateDui(config.detailResetTexture, config.detailResetSizeX, config.detailResetSizeY)
-    _G.duiObj = duiObjDetail
-    local duiDetail = GetDuiHandle(duiObjDetail)
-    local txDetail = CreateRuntimeTextureFromDuiHandle(txdDetail, 'duiTexDetail', duiDetail)
-    AddReplaceTexture(config.ytdName, config.detailResetTextureName, 'duiTxdDetail', 'duiTexDetail')
+        RemoveReplaceTexture(config.ytdName, config.detailTextureName)
+        RemoveReplaceTexture(config.ytdName, config.bumpTextureName)
 
-    -- Bump
-    local txdBump = CreateRuntimeTxd("duiTxdBump")
-    local duiObjBump = CreateDui(config.bumpResetTexture, config.bumpResetSizeX, config.bumpResetSizeY)
-    _G.duiObj = duiObjBump
-    local duiBump = GetDuiHandle(duiObjBump)
-    local txBump = CreateRuntimeTextureFromDuiHandle(txdBump, 'duiTexBump', duiBump)
-    AddReplaceTexture(config.ytdName, config.bumpResetTextureName, 'duiTxdBump', 'duiTexBump')
+    end
 
 end)
+
 
 function notify(str)
     BeginTextCommandThefeedPost("STRING")
@@ -206,4 +201,19 @@ function SetDisplay(bool)
         type = "ui",
         status = bool,
     })
+end
+
+function releaseDui(id)
+    if (not duis[id]) then
+        return
+    end
+
+    local settings = duis[id]
+    local duiSize = settings.duiSize
+
+    SetDuiUrl(settings.duiObject, "about:blank")
+    if not availableDuis[duiSize] then
+        availableDuis[duiSize] = {}
+    end
+    table.insert(availableDuis[duiSize], id)
 end
