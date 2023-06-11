@@ -23,21 +23,3 @@ config.bumpTextureName = "waterbump_sign_1"
 config.bumpTexture = "https://cdn.discordapp.com/attachments/692053325079642162/1094639023965868112/ezgif-1-d05fc5f494.gif"
 config.bumpSizeX = 32
 config.bumpSizeY = 32
-
-
-
--- Reset textures
-
--- Detail texture
-
-config.detailResetTextureName = "water_sign_1"
-config.detailResetTexture = "https://cdn.discordapp.com/attachments/1049744688053243927/1113224847116472400/water_sign_1.png"
-config.detailResetSizeX = 4
-config.detailResetSizeY = 4
-
--- Bump Texture
-
-config.bumpResetTextureName = "waterbump_sign_1"
-config.bumpResetTexture = "https://cdn.discordapp.com/attachments/691318403327328336/1099324694500478996/waterbump_sign_1.png"
-config.bumpResetSizeX = 4
-config.bumpResetSizeY = 4

@@ -202,18 +202,3 @@ function SetDisplay(bool)
         status = bool,
     })
 end
-
-function releaseDui(id)
-    if (not duis[id]) then
-        return
-    end
-
-    local settings = duis[id]
-    local duiSize = settings.duiSize
-
-    SetDuiUrl(settings.duiObject, "about:blank")
-    if not availableDuis[duiSize] then
-        availableDuis[duiSize] = {}
-    end
-    table.insert(availableDuis[duiSize], id)
-end
