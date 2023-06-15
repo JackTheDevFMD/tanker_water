@@ -12,7 +12,7 @@ Tanker water release script for the Free Mode Designs LTD Tanker
 
 In the future, I would like to be able to link it up with some other products to allow for refilling of engines etc from the tanker.
 
-If anyone wants to contribute to the project please feel free to shoot me a DM on discord @ JackTheDev#3347
+If anyone wants to contribute to the project please feel free to shoot me a DM on discord @ JackTheDev
 
 # Contact us
 
@@ -20,6 +20,3 @@ If anyone wants to contribute to the project please feel free to shoot me a DM o
 - Discord -> [https://discord.gg/fmd](https://discord.gg/fmd)
 - Email - > jackthedev@freemodedesigns.shop
 
-# Current Script bugs:
-
-- When /emptypool is ran, the texture doens't reset back to transparent.
