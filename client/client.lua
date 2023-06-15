@@ -1,6 +1,7 @@
 local display = false
 local fillingUp = false
 
+local currentVeh
 local txdDetail
 local duiObjDetail
 local duiDetail 
@@ -41,15 +42,17 @@ end)
 RegisterCommand("fillpool", function()
     local ped = PlayerPedId()
     local pedCoords = GetEntityCoords(ped)
-    local currentVeh = GetDisplayNameFromVehicleModel(GetEntityModel(GetVehiclePedIsIn(ped, false)))
+    currentVeh = GetDisplayNameFromVehicleModel(GetEntityModel(GetVehiclePedIsIn(ped, false)))
     local vehEntity = GetVehiclePedIsIn(GetPlayerPed(-1), false)
     local inVehicle = False
 
-    if currentVeh == config.spawnCode then 
-        inVehicle = true
+    for _, data in pairs(config.spawnCode) do
+        if data == currentVeh then 
+            inVehicle = true 
+            break
+        end
     end
     
-
     if inVehicle then
         if IsVehicleAConvertible(vehEntity, false) == 1 then
             fillingUp = true
@@ -63,12 +66,8 @@ RegisterCommand("fillpool", function()
 
             TriggerServerEvent("setWaterTexture")
 
-            local state = GetConvertibleRoofState(vehEntity)
-
-            --if state == 2 then 
             SetConvertibleRoof(vehEntity)
             LowerConvertibleRoof(vehEntity, false)
-            --end
 
             SetVehicleModKit(vehEntity, 0)
             SetVehicleMod(vehEntity, 37, GetNumVehicleMods(vehEntity, 37)-1, false)
@@ -97,8 +96,11 @@ RegisterCommand("emptypool", function()
     local inVehicle = False
 
 
-    if currentVeh == config.spawnCode then 
-        inVehicle = true
+    for _, data in pairs(config.spawnCode) do 
+        if data == currentVeh then 
+            inVehicle = true 
+            break
+        end
     end
     
 
@@ -168,7 +170,7 @@ AddEventHandler("updateTexture", function(toggle)
         _G.duiObjDetail = duiObjDetail
         duiDetail = GetDuiHandle(duiObjDetail)
         txDetail = CreateRuntimeTextureFromDuiHandle(txdDetail, 'duiTexDetail', duiDetail)
-        AddReplaceTexture(config.ytdName, config.detailTextureName, 'duiTxdDetail', 'duiTexDetail')
+        AddReplaceTexture(currentVeh, config.detailTextureName, 'duiTxdDetail', 'duiTexDetail')
 
         -- Bump
         txdBump = CreateRuntimeTxd("duiTxdBump")
@@ -176,12 +178,12 @@ AddEventHandler("updateTexture", function(toggle)
         _G.duiObjBump = duiObjBump
         duiBump = GetDuiHandle(duiObjBump)
         txBump = CreateRuntimeTextureFromDuiHandle(txdBump, 'duiTexBump', duiBump)
-        AddReplaceTexture(config.ytdName, config.bumpTextureName, 'duiTxdBump', 'duiTexBump')
+        AddReplaceTexture(currentVeh, config.bumpTextureName, 'duiTxdBump', 'duiTexBump')
 
     else 
 
-        RemoveReplaceTexture(config.ytdName, config.detailTextureName)
-        RemoveReplaceTexture(config.ytdName, config.bumpTextureName)
+        RemoveReplaceTexture(currentVeh, config.detailTextureName)
+        RemoveReplaceTexture(currentVeh, config.bumpTextureName)
 
     end
 

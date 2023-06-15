@@ -1,13 +1,15 @@
 config = {}
 
 -- Add more to this if you are using the same truck with different spawn codes. 
-config.spawnCode = "ftanker"
+config.spawnCode = {
+    "ftanker",
+    "ftanker2"
+}
 config.useUI = true
 
 -- !!!! DO NOT CHANGE ANYTHING BELOW THIS !!!! --
 config.resourceName = "tanker_water"
 config.bone = "misc_z"
-config.ytdName = "ftanker"
 
 
 -- Detail texture
