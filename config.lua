@@ -15,13 +15,13 @@ config.bone = "misc_z"
 -- Detail texture
 
 config.detailTextureName = "water_sign_1"
-config.detailTexture = "https://cdn.discordapp.com/attachments/692053325079642162/1094643018264481832/water.gif"
+config.detailTexture = "https://cdn.shopify.com/s/files/1/0526/1030/2149/files/water.gif?v=1714823830"
 config.detailSizeX = 32
 config.detailSizeY = 32
 
 -- Bump Texture
 
 config.bumpTextureName = "waterbump_sign_1"
-config.bumpTexture = "https://cdn.discordapp.com/attachments/692053325079642162/1094639023965868112/ezgif-1-d05fc5f494.gif"
+config.bumpTexture = "https://cdn.shopify.com/s/files/1/0526/1030/2149/files/water_bump.gif?v=1714823842"
 config.bumpSizeX = 32
 config.bumpSizeY = 32
